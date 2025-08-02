@@ -1,0 +1,7 @@
+{
+  "name": "pet-care-log",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
