@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,5 +16,6 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
+
+  get uid() { return this.auth.currentUser?.uid ?? null; }
 }
-// This service provides methods for user registration, login, and logout using Firebase Authentication.
