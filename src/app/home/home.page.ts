@@ -38,3 +38,11 @@ export class HomePage {
     try { await this.fs.deletePet(id); this.present('Pet deleted'); }
     catch (e: any) { this.present(e.message || 'Error deleting pet'); }
   }
+
+  logout() { this.auth.logout(); }
+
+  private async present(message: string) {
+    const t = await this.toast.create({ message, duration: 1500, position: 'bottom' });
+    await t.present();
+  }
+}
