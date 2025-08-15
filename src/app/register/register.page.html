@@ -1,13 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-input label="Email" label-placement="floating" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Password" type="password" label-placement="floating" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Confirm Password" type="password" label-placement="floating" [(ngModel)]="confirm"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="register()">Create Account</ion-button>
+  <ion-button expand="block" fill="clear" routerLink="/login">Back to Login</ion-button>
 </ion-content>
