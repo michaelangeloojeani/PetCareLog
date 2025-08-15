@@ -1,20 +1,56 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Pet Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login" (click)="logout()">Logout</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Add a Pet</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input label="Name" label-placement="floating" [(ngModel)]="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Species" label-placement="floating" [(ngModel)]="species"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Birthday" type="date" label-placement="floating" [(ngModel)]="birthday"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea label="Notes" label-placement="floating" [(ngModel)]="notes"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="addPet()">Add Pet</ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Your Pets</ion-label>
+    </ion-list-header>
+
+    <ng-container *ngIf="pets$ | async as pets; else none">
+      <ion-item *ngFor="let p of pets">
+        <ion-label>
+          <h2>{{ p.name }} <small>({{ p.species }})</small></h2>
+          <p *ngIf="p.birthday">Birthday: {{ p.birthday }}</p>
+          <p *ngIf="p.notes">{{ p.notes }}</p>
+        </ion-label>
+        <ion-button color="danger" (click)="deletePet(p.id)">Delete</ion-button>
+      </ion-item>
+    </ng-container>
+
+    <ng-template #none>
+      <ion-item>
+        <ion-label>Loading pets...</ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-list>
 </ion-content>
